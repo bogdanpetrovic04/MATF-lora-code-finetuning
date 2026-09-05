@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "code-lora-project"
+version = "1.0.0"
+description = "Readable custom and PEFT LoRA comparison for code generation"
+requires-python = ">=3.10"
+dependencies = [
+    "evalplus==0.3.1",
+    "numpy>=2,<3",
+    "peft>=0.17,<1",
+    "pyarrow>=18,<26",
+    "PyYAML>=6,<7",
+    "torch>=2.5,<3",
+    "transformers==5.15.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+notebooks = [
+    "jupyter>=1,<2",
+    "matplotlib>=3.9,<4",
+    "pandas>=2.2,<4",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

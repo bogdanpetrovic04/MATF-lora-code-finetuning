@@ -1,0 +1,28 @@
+{
+  "evaluation": {
+    "evalplus_version": "0.3.1",
+    "evalplus_commit": "26d6d00bb1fd0fa37f39c99d5290da67891d1c5e",
+    "samples_per_task": 1,
+    "decoding": "greedy"
+  },
+  "results": [
+    {"benchmark": "HumanEval", "variant": "base", "correct": 110, "tasks": 164, "pass_at_1": 0.6707317073170732, "ci95": [0.5976, 0.7439]},
+    {"benchmark": "HumanEval", "variant": "custom", "correct": 127, "tasks": 164, "pass_at_1": 0.774390243902439, "ci95": [0.7073, 0.8354]},
+    {"benchmark": "HumanEval", "variant": "peft", "correct": 127, "tasks": 164, "pass_at_1": 0.774390243902439, "ci95": [0.7073, 0.8354]},
+    {"benchmark": "HumanEval+", "variant": "base", "correct": 99, "tasks": 164, "pass_at_1": 0.6036585365853658, "ci95": [0.5305, 0.6768]},
+    {"benchmark": "HumanEval+", "variant": "custom", "correct": 116, "tasks": 164, "pass_at_1": 0.7073170731707317, "ci95": [0.6341, 0.7805]},
+    {"benchmark": "HumanEval+", "variant": "peft", "correct": 115, "tasks": 164, "pass_at_1": 0.7012195121951219, "ci95": [0.628, 0.7683]},
+    {"benchmark": "MBPP", "variant": "base", "correct": 271, "tasks": 378, "pass_at_1": 0.716931216931217, "ci95": [0.672, 0.7619]},
+    {"benchmark": "MBPP", "variant": "custom", "correct": 272, "tasks": 378, "pass_at_1": 0.7195767195767195, "ci95": [0.6746, 0.7646]},
+    {"benchmark": "MBPP", "variant": "peft", "correct": 267, "tasks": 378, "pass_at_1": 0.7063492063492064, "ci95": [0.6614, 0.7513]},
+    {"benchmark": "MBPP+", "variant": "base", "correct": 231, "tasks": 378, "pass_at_1": 0.6111111111111112, "ci95": [0.5608, 0.6614]},
+    {"benchmark": "MBPP+", "variant": "custom", "correct": 235, "tasks": 378, "pass_at_1": 0.6216931216931217, "ci95": [0.574, 0.6693]},
+    {"benchmark": "MBPP+", "variant": "peft", "correct": 233, "tasks": 378, "pass_at_1": 0.6164021164021164, "ci95": [0.5688, 0.6667]}
+  ],
+  "paired_against_base": [
+    {"benchmark": "HumanEval+", "variant": "custom", "delta": 0.10365853658536585, "gains": 27, "losses": 10, "ci95": [0.0305, 0.1768]},
+    {"benchmark": "HumanEval+", "variant": "peft", "delta": 0.0975609756097561, "gains": 26, "losses": 10, "ci95": [0.0244, 0.1646]},
+    {"benchmark": "MBPP+", "variant": "custom", "delta": 0.010582010582010581, "gains": 25, "losses": 21, "ci95": [-0.0265, 0.045]},
+    {"benchmark": "MBPP+", "variant": "peft", "delta": 0.005291005291005291, "gains": 21, "losses": 19, "ci95": [-0.0265, 0.0397]}
+  ]
+}

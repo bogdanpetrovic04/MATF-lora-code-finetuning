@@ -1,0 +1,15 @@
+FROM python:3.11-slim
+
+ENV XDG_CACHE_HOME=/opt/evalplus-cache \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+RUN pip install --no-cache-dir evalplus==0.3.1 \
+    && useradd --uid 10001 --create-home evaluator \
+    && mkdir -p "$XDG_CACHE_HOME" \
+    && python -c "from evalplus.data import get_human_eval_plus, get_mbpp_plus; get_human_eval_plus(); get_mbpp_plus()" \
+    && python -c "from evalplus.data import get_human_eval_plus, get_human_eval_plus_hash, get_mbpp_plus, get_mbpp_plus_hash; from evalplus.eval._special_oracle import MBPP_OUTPUT_NOT_NONE_TASKS; from evalplus.evaluate import get_groundtruth; get_groundtruth(get_human_eval_plus(), get_human_eval_plus_hash(), []); get_groundtruth(get_mbpp_plus(), get_mbpp_plus_hash(), MBPP_OUTPUT_NOT_NONE_TASKS)" \
+    && chmod -R a=rX "$XDG_CACHE_HOME"
+
+USER 10001
+WORKDIR /home/evaluator

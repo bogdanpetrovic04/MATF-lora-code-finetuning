@@ -1,0 +1,29 @@
+{
+  "source_rows": 5000000,
+  "eligible_after_filtering": 1372043,
+  "selected_rows": 22000,
+  "train_rows": 20000,
+  "validation_rows": 2000,
+  "filters": {
+    "minimum_average_test_score": 0.8,
+    "minimum_mean_judgement": 4.0,
+    "maximum_formatted_tokens": 1024,
+    "exact_prompt_deduplication": true,
+    "benchmark_decontamination": true
+  },
+  "selected_domain_counts": {
+    "algorithmic": 5427,
+    "generic": 16573
+  },
+  "selected_generation_algorithm_counts": {
+    "evol-instruct": 7106,
+    "self-instruct": 14894
+  },
+  "selected_length_quartile_counts": {
+    "1": 5565,
+    "2": 5443,
+    "3": 5509,
+    "4": 5483
+  },
+  "length_quartile_boundaries": [347, 424, 535]
+}

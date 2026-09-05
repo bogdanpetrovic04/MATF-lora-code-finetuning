@@ -1,0 +1,32 @@
+seed: 42
+device: cuda:1
+
+model:
+  id: Qwen/Qwen2.5-Coder-1.5B
+  revision: df3ce67c0e24480f20468b6ef2894622d69eb73b
+
+data:
+  train: data/train_20k.parquet
+  validation: data/validation_2k.parquet
+
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: [q_proj, v_proj]
+
+training:
+  epochs: 1
+  learning_rate: 0.0002
+  weight_decay: 0.0
+  adam_betas: [0.9, 0.999]
+  adam_epsilon: 1.0e-8
+  warmup_ratio: 0.03
+  max_sequence_length: 1024
+  micro_batch_size: 8
+  gradient_accumulation_steps: 4
+  max_grad_norm: 1.0
+  gradient_checkpointing: true
+
+evaluation:
+  max_new_tokens: 512
