@@ -106,6 +106,7 @@ class LoRALinear(nn.Module):
         return self.base_layer.out_features
 
     def reset_lora_parameters(self) -> None:
+        # Kaiming initialization keeps the scale of activaitons and gradients stable 
         nn.init.kaiming_uniform_(self.lora_A, a=math.sqrt(5))
         nn.init.zeros_(self.lora_B)
 
