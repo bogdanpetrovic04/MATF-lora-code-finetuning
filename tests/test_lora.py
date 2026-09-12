@@ -65,6 +65,7 @@ def test_optimizer_updates_adapters_but_not_base_weights():
     )
 
     x, target = torch.randn(8, 6), torch.randn(8, 4)
+    # We use two steps since lora_B is initialized as zero matrix, so we need two steps to update lora_A
     for _ in range(2):
         optimizer.zero_grad()
         F.mse_loss(layer(x), target).backward()
