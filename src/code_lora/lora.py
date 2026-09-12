@@ -157,6 +157,7 @@ class LoRALinear(nn.Module):
 
 
 def _is_target(module_name: str, target_modules: tuple[str, ...]) -> bool:
+    """Check whether the module name corresponds to one of the target modules."""
     return module_name.rsplit(".", maxsplit=1)[-1] in target_modules
 
 
