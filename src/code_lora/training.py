@@ -92,15 +92,25 @@ def train(
     for _ in range(config["epochs"]):
         for group_start in range(0, len(dataset), batch_size):
             group_end = min(group_start + batch_size, len(dataset))
+
+            # Gradients are cleared once per batch, and not in between micro-batches.
             optimizer.zero_grad(set_to_none=True)
             step_loss = 0.0
+
+            # Split a batch into micro-batches to save GPU memory. 
             for start in range(group_start, group_end, micro_batch_size):
                 end = min(start + micro_batch_size, group_end)
                 rows = [dataset[i] for i in range(start, end)]
                 batch = {name: tensor.to(device) for name, tensor in collate(rows).items()}
+                
                 with torch.autocast(device_type=device.type, dtype=torch.bfloat16):
-                    raw_loss = model(**batch, use_cache=False).loss
+                    raw_loss = model(
+                        input_ids=batch["input_ids"],
+                        attention_mask=batch["attention_mask"],
+                        labels=batch["labels"]
+                        ,use_cache=False).loss
                     loss = raw_loss * (len(rows) / (group_end - group_start))
+                    
                 loss.backward()
                 step_loss += loss.detach().float().item()
                 tokens_seen += int(batch["attention_mask"].sum().item())
