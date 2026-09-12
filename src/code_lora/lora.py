@@ -83,6 +83,8 @@ class LoRALinear(nn.Module):
         self.merged = False
 
         self.base_layer.requires_grad_(False)
+        
+        # LoRA adapters are created with the same dtype and device as the base layer
         factory_kwargs = {
             "device": base_layer.weight.device,
             "dtype": base_layer.weight.dtype,
