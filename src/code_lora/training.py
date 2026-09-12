@@ -59,6 +59,7 @@ def train(
     model.to(device)
     model.train()
     model.config.use_cache = False
+    # Gradient checkpointing saves on  memory by recomputing activations during a backwards pass.
     if config["gradient_checkpointing"]:
         model.gradient_checkpointing_enable()
         model.enable_input_require_grads()
@@ -75,8 +76,11 @@ def train(
         weight_decay=config["weight_decay"],
     )
     total_steps = math.ceil(len(dataset) / batch_size) * config["epochs"]
+
+    # Warmup increases the learning rate gradually, up to the configured rate. 
     warmup_steps = math.ceil(total_steps * config["warmup_ratio"])
     scheduler = get_cosine_schedule_with_warmup(optimizer, warmup_steps, total_steps)
+
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     metrics_path = output_dir / "metrics.jsonl"
